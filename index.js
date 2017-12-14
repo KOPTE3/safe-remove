@@ -81,6 +81,6 @@ if (!stats.isDirectory()) {
 		files.push(file);
 	}, function () {
 		safeRemove(files);
-		fs.rmdirSync(path);
+		fs.rmdirSync(pathname);
 	});
 }
