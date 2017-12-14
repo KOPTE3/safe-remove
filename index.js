@@ -61,7 +61,6 @@ function removeFile(filename) {
 }
 
 function safeRemove(files) {
-	console.log('Remove', files);
 	files.map(removeFile);
 }
 
@@ -82,5 +81,6 @@ if (!stats.isDirectory()) {
 		files.push(file);
 	}, function () {
 		safeRemove(files);
+		fs.unlinkSync(pathname);
 	});
 }
