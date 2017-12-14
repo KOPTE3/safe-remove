@@ -52,7 +52,7 @@ function removeFile(filename) {
 
 		fs.writeFileSync(filename, buffer);
 		// сбрасываем буферизованные данные на диск
-		process.stdout.write();
+		process.stdout.write('');
 
 		buffer = null;
 	}
