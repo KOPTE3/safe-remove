@@ -64,6 +64,20 @@ function safeRemove(files) {
 	files.map(removeFile);
 }
 
+function removeFolderRecursive(path) {
+	if (fs.existsSync(path)) {
+		fs.readdirSync(path).forEach(function (file, index) {
+			const curPath = path + "/" + file;
+			if (fs.lstatSync(curPath).isDirectory()) {
+				removeFolderRecursive(curPath);
+			} else {
+				safeRemove([file])
+			}
+		});
+		fs.rmdirSync(path);
+	}
+}
+
 if (!stats.isDirectory()) {
 	files.push(pathname);
 	safeRemove(files);
@@ -81,6 +95,6 @@ if (!stats.isDirectory()) {
 		files.push(file);
 	}, function () {
 		safeRemove(files);
-		fs.rmdirSync(pathname);
+		removeFolderRecursive(pathname);
 	});
 }
